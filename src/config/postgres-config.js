@@ -1,21 +1,20 @@
 const path = require('path');
 module.exports = {
   development: {
-    // debug: true,
     client: 'pg',
     connection: {
-      host: 'localhost',
-      database: 'ums',
-      user: 'postgres',
-      password: 'postgres',
-      port: 5432
+      host: process.env.HOST,
+      database: process.env.DB_DATABASE,
+      user: process.env.DB_USER ,
+      password: process.env.DB_PASSWORD,
+      port: process.env.DB_PORT
     },
     migrations: {
       tableName: 'knex_migrations',
-      directory: path.join(__dirname, '../../migrations'),
+      directory: '../../migrations',
     },
     seeds: {
-      directory: path.join(__dirname, '../../seeds'),
+      directory: '../../seeds',
     },
   },
   staging: {
