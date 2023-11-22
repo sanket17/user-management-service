@@ -3,16 +3,16 @@ module.exports = {
     client: 'mysql',
     connection: {
       host: 'localhost',
-      user: 'mysql',
-      password: 'root',
-      database: 'ums-dev',
+      user: 'ums',
+      password: 'ums_mysql',
+      database: 'ums_dev',
     },
     migrations: {
-      // tableName: 'knex_migrations',
-      directory: './migrations/mysql',
+      tableName: 'knex_migrations',
+      directory: '../../migrations',
     },
     seeds: {
-      directory: './seeds/mysql',
+      directory: '../../seeds',
     },
   },
   staging: {
@@ -24,7 +24,7 @@ module.exports = {
       database: 'staging-database',
     },
     migrations: {
-      // tableName: 'knex_migrations',
+      tableName: 'knex_migrations',
       directory: './migrations/mysql',
     },
     seeds: {
