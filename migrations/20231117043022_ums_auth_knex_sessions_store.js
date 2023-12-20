@@ -1,11 +1,10 @@
 const { uuidConfig } = require('../src/config/uuidGenerate')
 exports.up = function (knex) {
   return knex.schema.createTable('sessions', function (table) {
-    table.string('sid').primary().unique();
+    table.string('sid').primary().unique().defaultTo(knex.raw(uuidConfig(knex)));
     table.json('sess').notNullable(); // Session data
     table.timestamp('expired').notNullable(); // Session expiration timestamp
-    table.timestamp('created').defaultTo(knex.fn.now()); // Session creation timestamp
-    table.index('expired');
+    table.timestamps(true, true);
   });
 };
 

@@ -6,6 +6,7 @@ exports.up = async function (knex) {
     table.string('last_name', 255).notNullable();
     table.string('password');
     table.string('email').unique().notNullable();
+    table.string('phone').unique().notNullable();
     table.string('oauth_id').nullable();
     table.string('oauth_provider').nullable();
     table.boolean('email_verified').defaultTo(false);

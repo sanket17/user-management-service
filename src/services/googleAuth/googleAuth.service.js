@@ -1,4 +1,4 @@
-const passport = require('../../../passportConfig')
+const passport = require('../../passportStrategy')
 const userDao = require('../../db/masterUser/userDao');
 
 const googleAuthLogin = async (req, res) => {
@@ -7,11 +7,11 @@ const googleAuthLogin = async (req, res) => {
 }
 
 const googleCallback = async (req, res) => {
-  return await passport.authenticate('google', {
-    successRedirect: res.status(200).send('hello'),//res.status added here to check on the browser
-    // failureRedirect: res.status(400),//res.status added here to check on the browser
+  await passport.authenticate('google', {
+    failureRedirect: 'localhost:3000/auth/google-auth/login',//'localhost:3000/auth/google-auth/login',//res.status added here to check on the browser
     failureFlash: true
   })(req, res, async () => {
+    // If the user is not found, create a new user in the database
     const email = req.user.emails[0].value;
     let user = await userDao.getUserByEmail(email);
 
@@ -24,7 +24,7 @@ const googleCallback = async (req, res) => {
         oauth_provider: req.user.provider
       });
     }
-    return res.status(201)
+    return user;
   });
 }
 

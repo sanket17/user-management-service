@@ -5,7 +5,7 @@ const createUser = async (userData) => {
   return result;
 }
 const getUserByEmail = async (email) => {
-  const result = await knex('master_user').first();
+  const result = await knex('master_user').where({ email }).first();
   return result;
 }
 
